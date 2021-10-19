@@ -13,7 +13,7 @@ import Tkinter as tk
 
 #-- Connect to the vehicle
 print('Connecting...')
-vehicle = connect('udp:127.0.0.1:14551')
+vehicle = connect('udp:127.0.0.1:14550')
 
 #-- Setup the commanded flying speed
 gnd_speed = 5 # [m/s]
