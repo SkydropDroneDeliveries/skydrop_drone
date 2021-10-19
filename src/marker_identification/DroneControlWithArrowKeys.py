@@ -2,7 +2,6 @@
 Simple script for take off and control with arrow keys
 """
 
-
 import time
 from dronekit import connect, VehicleMode, LocationGlobalRelative, Command, LocationGlobal
 from pymavlink import mavutil
@@ -16,7 +15,7 @@ print('Connecting...')
 vehicle = connect('udp:127.0.0.1:14550')
 
 #-- Setup the commanded flying speed
-gnd_speed = 5 # [m/s]
+gnd_speed = 1 # [m/s]
 
 #-- Define arm and takeoff
 def arm_and_takeoff(altitude):
@@ -75,7 +74,10 @@ def key(event):
         if event.keysym == 'r':
             print("r pressed >> Set the vehicle to RTL")
             vehicle.mode = VehicleMode("RTL")
-            
+
+            # Close vehicle object
+            vehicle.close()
+
     else: #-- non standard keys
         if event.keysym == 'Up':
             set_velocity_body(vehicle, gnd_speed, 0, 0)
@@ -89,7 +91,7 @@ def key(event):
     
 #---- MAIN FUNCTION
 #- Takeoff
-arm_and_takeoff(10)
+arm_and_takeoff(8)
  
 #- Read the keyboard with tkinter
 root = tk.Tk()
