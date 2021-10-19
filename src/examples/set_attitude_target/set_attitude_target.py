@@ -1,13 +1,18 @@
 #!/usr/bin/env python
 
 """
+
 set_attitude_target.py: (Copter Only)
+
 This example shows how to move/direct Copter and send commands
  in GUIDED_NOGPS mode using DroneKit Python.
+
 Caution: A lot of unexpected behaviors may occur in GUIDED_NOGPS mode.
         Always watch the drone movement, and make sure that you are in dangerless environment.
         Land the drone as soon as possible when it shows any unexpected behavior.
+
 Tested in Python 2.7.10
+
 """
 
 from dronekit import connect, VehicleMode, LocationGlobal, LocationGlobalRelative
@@ -17,8 +22,9 @@ import math
 
 # Set up option parsing to get connection string
 import argparse
-parser = argparse.ArgumentParser()
-parser.add_argument('--connect', default='127.0.0.1:14550')
+parser = argparse.ArgumentParser(description='Control Copter and send commands in GUIDED mode ')
+parser.add_argument('--connect',
+                   help="Vehicle connection target string. If not specified, SITL automatically started and used.")
 args = parser.parse_args()
 
 connection_string = args.connect
@@ -159,10 +165,8 @@ set_attitude(duration = 3)
 # Uncomment the lines below for testing roll angle and yaw rate.
 # Make sure that there is enough space for testing this.
 
-#set_attitude(roll_angle = 1, thrust = 0.5, duration = 3)
-print("Move 1")
-#set_attitude(yaw_rate = 30, thrust = 0.5, duration = 3)
-print("Move 2")
+# set_attitude(roll_angle = 1, thrust = 0.5, duration = 3)
+# set_attitude(yaw_rate = 30, thrust = 0.5, duration = 3)
 
 # Move the drone forward and backward.
 # Note that it will be in front of original position due to inertia.
