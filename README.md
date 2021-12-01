@@ -48,20 +48,20 @@ source ~/.bashrc
 cd ~/catkin_ws/src
 git clone git@github.com:SkydropDroneDeliveries/skydrop_drone.git
 ```
-Rename the directory from skydrop_drone to skydrop.
+**Step 03:** Rename the directory from skydrop_drone to skydrop.
 ```
 mv skydrop_drone skydrop
 ```
-Set model path for Gazebo models.
+**Step 04:** Set model path for Gazebo models.
 ```
 echo "export GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:$HOME/catkin_ws/src/skydrop/models" >> ~/.bashrc
 ```
-Build the project.
+**Step 05:** Build the project.
 ```
 cd ~/catkin_ws
 catkin build
 ```
-Update the global variables.
+**Step 06:** Update the global variables.
 ```
 source ~/.bashrc
 ```
