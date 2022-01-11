@@ -20,6 +20,7 @@ print('Connecting...')
 vehicle = connect('udp:127.0.0.1:14550')
 
 #-- Setup the commanded flying speed
+<<<<<<< Updated upstream
 gnd_speed = 0.1 # [m/s]
 =======
 # Connect to the Vehicle
@@ -33,6 +34,9 @@ vehicle = connect(args.connect, baud=921600, wait_ready=True)
 
 #-- Setup the commanded flying speed
 gnd_speed = 0.5 # [m/s]
+>>>>>>> Stashed changes
+=======
+gnd_speed = 1 # [m/s]
 >>>>>>> Stashed changes
 
 #-- Define arm and takeoff
@@ -91,7 +95,7 @@ def key(event):
     if event.char == event.keysym: #-- standard keys
         if event.keysym == 'r':
             print("r pressed >> Set the vehicle to RTL")
-            vehicle.mode = VehicleMode("RTL")
+            vehicle.mode = VehicleMode("LAND")
 
             # Close vehicle object
             vehicle.close()
@@ -110,9 +114,13 @@ def key(event):
 #---- MAIN FUNCTION
 #- Takeoff
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 arm_and_takeoff(8)
 =======
 arm_and_takeoff(5)
+>>>>>>> Stashed changes
+=======
+arm_and_takeoff(4)
 >>>>>>> Stashed changes
  
 #- Read the keyboard with tkinter
