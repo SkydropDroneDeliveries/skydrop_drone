@@ -17,7 +17,7 @@ parser.add_argument('--connect', default='127.0.0.1:14550')
 args = parser.parse_args()
 
 # Connect to the Vehicle
-print 'Connecting to vehicle on: %s' % args.connect
+#print 'Connecting to vehicle on: %s' % args.connect
 vehicle = connect(args.connect, baud=921600, wait_ready=True)
 
 # Get some vehicle attributes (state)
@@ -78,8 +78,6 @@ while(True):
     print(frame)
     # Our operations on the frame come here
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-
 
     grey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_100)

@@ -134,7 +134,7 @@ def arm_and_takeoff(aTargetAltitude):
 
 if __name__ == '__main__':
     #Takeoff height in meters
-    arm_and_takeoff(4)
+    arm_and_takeoff(5)
 
     print("Take off complete")
 
@@ -143,7 +143,7 @@ if __name__ == '__main__':
     # Hover for 10 seconds
     time.sleep(2)
 
-    rospy.init_node("imagetimer111", anonymous=True)
+    rospy.init_node("imagetimer", anonymous=True)
     my_node = Nodo()
     my_node.start()
 
