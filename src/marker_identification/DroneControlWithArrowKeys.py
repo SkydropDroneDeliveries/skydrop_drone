@@ -14,26 +14,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--connect', default='127.0.0.1:14550')
 args = parser.parse_args()
 
-<<<<<<< Updated upstream
 #-- Connect to the vehicle
 print('Connecting...')
 vehicle = connect('udp:127.0.0.1:14550')
 
 #-- Setup the commanded flying speed
 gnd_speed = 0.1 # [m/s]
-=======
-# Connect to the Vehicle
-print 'Connecting to vehicle on: %s' % args.connect
-vehicle = connect(args.connect, baud=921600, wait_ready=True)
-
-
-# #-- Connect to the vehicle
-# print('Connecting...')
-# vehicle = connect('udp:127.0.0.1:14551')
-
-#-- Setup the commanded flying speed
-gnd_speed = 0.5 # [m/s]
->>>>>>> Stashed changes
 
 #-- Define arm and takeoff
 def arm_and_takeoff(altitude):
@@ -109,11 +95,7 @@ def key(event):
     
 #---- MAIN FUNCTION
 #- Takeoff
-<<<<<<< Updated upstream
 arm_and_takeoff(8)
-=======
-arm_and_takeoff(5)
->>>>>>> Stashed changes
  
 #- Read the keyboard with tkinter
 root = tk.Tk()
