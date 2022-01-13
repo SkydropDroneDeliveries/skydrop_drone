@@ -14,30 +14,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--connect', default='127.0.0.1:14550')
 args = parser.parse_args()
 
-<<<<<<< Updated upstream
 #-- Connect to the vehicle
 print('Connecting...')
 vehicle = connect('udp:127.0.0.1:14550')
 
 #-- Setup the commanded flying speed
-<<<<<<< Updated upstream
 gnd_speed = 0.1 # [m/s]
-=======
-# Connect to the Vehicle
-print 'Connecting to vehicle on: %s' % args.connect
-vehicle = connect(args.connect, baud=921600, wait_ready=True)
-
-
-# #-- Connect to the vehicle
-# print('Connecting...')
-# vehicle = connect('udp:127.0.0.1:14551')
-
-#-- Setup the commanded flying speed
-gnd_speed = 0.5 # [m/s]
->>>>>>> Stashed changes
-=======
-gnd_speed = 1 # [m/s]
->>>>>>> Stashed changes
 
 #-- Define arm and takeoff
 def arm_and_takeoff(altitude):
@@ -95,7 +77,7 @@ def key(event):
     if event.char == event.keysym: #-- standard keys
         if event.keysym == 'r':
             print("r pressed >> Set the vehicle to RTL")
-            vehicle.mode = VehicleMode("LAND")
+            vehicle.mode = VehicleMode("RTL")
 
             # Close vehicle object
             vehicle.close()
@@ -113,20 +95,10 @@ def key(event):
     
 #---- MAIN FUNCTION
 #- Takeoff
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 arm_and_takeoff(8)
-=======
-arm_and_takeoff(5)
->>>>>>> Stashed changes
-=======
-arm_and_takeoff(4)
->>>>>>> Stashed changes
  
 #- Read the keyboard with tkinter
 root = tk.Tk()
 print(">> Control the drone with the arrow keys. Press r for RTL mode")
 root.bind_all('<Key>', key)
 root.mainloop()
- 
-    
