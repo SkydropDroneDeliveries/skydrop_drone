@@ -22,7 +22,7 @@ class Nodo(object):
     def callback(self, msg):
         rospy.loginfo('Image received...')
         self.image = self.br.imgmsg_to_cv2(msg)
-        print(self.image)
+        print('Image ...', self.image)
 
 
     def start(self):

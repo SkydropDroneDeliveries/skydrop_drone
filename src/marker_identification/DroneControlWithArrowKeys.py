@@ -102,5 +102,3 @@ root = tk.Tk()
 print(">> Control the drone with the arrow keys. Press r for RTL mode")
 root.bind_all('<Key>', key)
 root.mainloop()
- 
-    
