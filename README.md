@@ -20,6 +20,7 @@ The following tools and softwares should be installed in the local machine.
 - ROS Melodic Morenia (Desktop-Full Install) ([ROS installation instructions](http://wiki.ros.org/melodic/Installation/Ubuntu))
 - Gazebo 9.0 (Comes as the default Gazebo version when installing ROS Melodic Morenia)
 - Ardupilot & SITL ([Ardupilot installation instructions](https://ardupilot.org/dev/docs/building-setup-linux.html#building-setup-linux) | [Setting up SITL on Linux](https://ardupilot.org/dev/docs/setting-up-sitl-on-linux.html))
+- Gazebo with SITL ([Gazebo with SITL installtion instructions](https://ardupilot.org/dev/docs/using-gazebo-simulator-with-sitl.html)) 
 - MAVROS ([MAVROS installation instructions](https://github.com/mavlink/mavros/blob/master/mavros/README.md#installation))
 - QGroundControl ([QGroundControl installation instructions](https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html))
 - Dronekit-python library ([Dronekit installation instructions](https://dronekit-python.readthedocs.io/en/latest/guide/quick_start.html#installation))
@@ -34,10 +35,9 @@ The following tools and softwares should be installed in the local machine.
 For more delatis visit [ROS wiki: create a ROS workspace using ```catkin_make```](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#:~:text=you%20installed%20ROS.-,Create%20a%20ROS%20Workspace,-catkin). </br>
 Here we use ```catkin build``` instead of ```catkin_make```.
 ```
-cd mkdir -p ~/catkin_ws/src
+mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/
 catkin init
-cd ~/catkin_ws
 catkin build
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
