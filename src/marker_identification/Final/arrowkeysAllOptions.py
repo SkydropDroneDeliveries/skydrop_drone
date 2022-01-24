@@ -2,29 +2,22 @@
 Simple script for take off and control with arrow keys
 """
 
-
 import time
 from dronekit import connect, VehicleMode, LocationGlobalRelative, Command, LocationGlobal
 from pymavlink import mavutil
 
 #- Importing Tkinter: sudo apt-get install python-tk
 import Tkinter as tk
-import argparse  
+
 
 #-- Connect to the vehicle
 print('Connecting...')
-parser = argparse.ArgumentParser()
-parser.add_argument('--connect', default='127.0.0.1:14550')
-args = parser.parse_args()
-
-# Connect to the Vehicle
-print ('Connecting to vehicle on: %s' % args.connect)
-vehicle = connect(args.connect, baud=921600, wait_ready=True)
-
-
+vehicle = connect('udp:127.0.0.1:14550')
 
 #-- Setup the commanded flying speed
-gnd_speed = 0.4 # [m/s]
+gnd_speed = 0.2 # [m/s]
+#-- Setup the commanded rotation angle
+angle = 1 #[degrees]
 
 #-- Define arm and takeoff
 def arm_and_takeoff(altitude):
@@ -75,6 +68,27 @@ def set_velocity_body(vehicle, vx, vy, vz):
             0, 0)
     vehicle.send_mavlink(msg)
     vehicle.flush()
+
+
+#-- Define the function for sending mavlink condition yaw command
+def condition_yaw(vehicle, heading, direction, relative=True):
+    if relative:
+        is_relative=1 #yaw relative to direction of travel
+    else:
+        is_relative=0 #yaw is an absolute angle
+    # create the CONDITION_YAW command using command_long_encode()
+    msg = vehicle.message_factory.command_long_encode(
+        0, 0,    # target system, target component
+        mavutil.mavlink.MAV_CMD_CONDITION_YAW, #command
+        0, #confirmation
+        heading,    # param 1, yaw in degrees
+        0,          # param 2, yaw speed deg/s
+        direction,          # param 3, direction -1 ccw, 1 cw
+        is_relative, # param 4, relative offset 1, absolute angle 0
+        0, 0, 0)    # param 5 ~ 7 not used
+    # send command to vehicle
+    vehicle.send_mavlink(msg)
+    vehicle.flush()
     
     
 #-- Key event function
@@ -83,16 +97,23 @@ def key(event):
         if event.keysym == 'r':
             print("r pressed >> Set the vehicle to RTL")
             vehicle.mode = VehicleMode("RTL")
-            
+
+            # Close vehicle object
+            vehicle.close()
+        elif event.keysym == 'w':
+            set_velocity_body(vehicle, 0, 0, -gnd_speed)
+        elif event.keysym == 's':
+            set_velocity_body(vehicle, 0, 0, gnd_speed)
+        elif event.keysym == 'a':
+            condition_yaw(vehicle, angle, -1)
+        elif event.keysym == 'd':
+            condition_yaw(vehicle, angle, 1)
+
     else: #-- non standard keys
         if event.keysym == 'Up':
             set_velocity_body(vehicle, gnd_speed, 0, 0)
         elif event.keysym == 'Down':
             set_velocity_body(vehicle,-gnd_speed, 0, 0)
-        elif event.keysym == 'KP_8':
-            set_velocity_body(vehicle, 0, 0, -gnd_speed)
-        elif event.keysym == 'KP_2':
-            set_velocity_body(vehicle, 0, 0, gnd_speed)   
         elif event.keysym == 'Left':
             set_velocity_body(vehicle, 0, -gnd_speed, 0)
         elif event.keysym == 'Right':
@@ -101,11 +122,10 @@ def key(event):
     
 #---- MAIN FUNCTION
 #- Takeoff
-arm_and_takeoff(5)
+arm_and_takeoff(4)
  
 #- Read the keyboard with tkinter
 root = tk.Tk()
 print(">> Control the drone with the arrow keys. Press r for RTL mode")
 root.bind_all('<Key>', key)
 root.mainloop()
- 
