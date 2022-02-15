@@ -5,5 +5,8 @@
       <arg name="world_name" value="$(find skydrop)/worlds/urbanArucoFrontFacingCamera2.world"/>
       <arg name="gui" value="$(arg gui)"/>
       <!-- more default parameters can be changed here -->
+      
+      <!-- to publish /clock -->
+      <!-- <arg name="use_sim_time" value="false"/> -->
     </include>
   </launch>  
