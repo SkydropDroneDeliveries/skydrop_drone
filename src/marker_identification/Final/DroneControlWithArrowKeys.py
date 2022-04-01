@@ -24,7 +24,7 @@ vehicle = connect(args.connect, baud=921600, wait_ready=True)
 
 
 #-- Setup the commanded flying speed
-gnd_speed = 0.4 # [m/s]
+gnd_speed = 2 # [m/s]
 
 #-- Define arm and takeoff
 def arm_and_takeoff(altitude):

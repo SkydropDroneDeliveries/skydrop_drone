@@ -39,7 +39,7 @@ if not connection_string:
 
 # Connect to the Vehicle
 print('Connecting to vehicle on: %s' % connection_string)
-vehicle = connect(connection_string, wait_ready=True)
+vehicle = connect('udp:127.0.0.1:14550', wait_ready=True)
 
 def arm_and_takeoff_nogps(aTargetAltitude):
     """
@@ -157,11 +157,12 @@ def to_quaternion(roll = 0.0, pitch = 0.0, yaw = 0.0):
 
 # Take off 2.5m in GUIDED_NOGPS mode.
 arm_and_takeoff_nogps(2.5)
+time.sleep(5)
 
 # Hold the position for 3 seconds.
 print("Hold position for 3 seconds")
 set_attitude(duration = 3)
-
+time.sleep(5)
 # Uncomment the lines below for testing roll angle and yaw rate.
 # Make sure that there is enough space for testing this.
 
@@ -172,10 +173,10 @@ set_attitude(duration = 3)
 # Note that it will be in front of original position due to inertia.
 print("Move forward")
 set_attitude(pitch_angle = -5, thrust = 0.5, duration = 3.21)
-
+time.sleep(5)
 print("Move backward")
 set_attitude(pitch_angle = 5, thrust = 0.5, duration = 3)
-
+time.sleep(5)
 
 print("Setting LAND mode...")
 vehicle.mode = VehicleMode("LAND")

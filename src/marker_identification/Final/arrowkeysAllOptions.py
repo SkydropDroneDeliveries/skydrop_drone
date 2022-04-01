@@ -15,7 +15,7 @@ print('Connecting...')
 vehicle = connect('udp:127.0.0.1:14550')
 
 #-- Setup the commanded flying speed
-gnd_speed = 0.2 # [m/s]
+gnd_speed = 0.1 # [m/s]
 #-- Setup the commanded rotation angle
 angle = 1 #[degrees]
 
@@ -113,7 +113,7 @@ def key(event):
         if event.keysym == 'Up':
             set_velocity_body(vehicle, gnd_speed, 0, 0)
         elif event.keysym == 'Down':
-            set_velocity_body(vehicle,-gnd_speed, 0, 0)
+                set_velocity_body(vehicle,-gnd_speed, 0, 0)
         elif event.keysym == 'Left':
             set_velocity_body(vehicle, 0, -gnd_speed, 0)
         elif event.keysym == 'Right':

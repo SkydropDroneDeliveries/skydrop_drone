@@ -28,7 +28,7 @@ from pymavlink import mavutil
 from opencv.lib_aruco_pose import *
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--connect', default = '')
+parser.add_argument('--connect', default='127.0.0.1:14550')
 args = parser.parse_args()
     
 #--------------------------------------------------
@@ -86,8 +86,8 @@ def check_angle_descend(angle_x, angle_y, angle_desc):
 #-------------- CONNECTION  
 #--------------------------------------------------    
 #-- Connect to the vehicle
-print('Connecting...')
-vehicle = connect(args.connect)  
+print ('Connecting to vehicle on: %s' % args.connect)
+vehicle = connect(args.connect, baud=921600, wait_ready=True)
 
 #--------------------------------------------------
 #-------------- PARAMETERS  
@@ -99,8 +99,8 @@ deg_2_rad   = 1.0/rad_2_deg
 #-------------- LANDING MARKER  
 #--------------------------------------------------    
 #--- Define Tag
-id_to_find      = 72
-marker_size     = 10 #- [cm]
+id_to_find      = 53
+marker_size     = 15 #- [cm]
 freq_send       = 1 #- Hz
 
 land_alt_cm         = 50.0
@@ -113,12 +113,13 @@ land_speed_cms      = 30.0
 # Find full directory path of this script, used for loading config and other files
 cwd                 = path.dirname(path.abspath(__file__))
 calib_path          = cwd+"/../opencv/"
-camera_matrix       = np.loadtxt(calib_path+'cameraMatrix_raspi.txt', delimiter=',')
-camera_distortion   = np.loadtxt(calib_path+'cameraDistortion_raspi.txt', delimiter=',')                                      
-aruco_tracker       = ArucoSingleTracker(id_to_find=id_to_find, marker_size=marker_size, show_video=False, 
+camera_matrix       = np.loadtxt(calib_path+'cameraMatrix_webcam.txt', delimiter=',')
+camera_distortion   = np.loadtxt(calib_path+'cameraDistortion_webcam.txt', delimiter=',')                                      
+aruco_tracker       = ArucoSingleTracker(id_to_find=id_to_find, marker_size=marker_size, show_video=True, 
                 camera_matrix=camera_matrix, camera_distortion=camera_distortion)
                 
-                
+print ("Callibration Success")
+
 time_0 = time.time()
 
 while True:                

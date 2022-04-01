@@ -40,7 +40,7 @@ if not connection_string:
 
 # Connect to the Vehicle
 print('Connecting to vehicle on: %s' % connection_string)
-vehicle = connect(connection_string, wait_ready=True, timeout=300)
+vehicle = connect('udp:127.0.0.1:14550', wait_ready=True, timeout=300)
 
 
 
@@ -82,7 +82,7 @@ def arm_and_takeoff(aTargetAltitude):
 try:
     # Use the python gps package to access the laptop GPS
     gpsd = gps.gps(mode=gps.WATCH_ENABLE)
-
+    print(gpsd)
     #Arm and take off to altitude of 5 meters
     arm_and_takeoff(5)
 

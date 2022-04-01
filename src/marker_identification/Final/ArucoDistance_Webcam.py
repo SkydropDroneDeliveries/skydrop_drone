@@ -53,42 +53,43 @@ while(cam.isOpened()):
     imaxis = aruco.drawDetectedMarkers(QueryImg.copy(), corners, ids)
 
 
-    if tvecs is not None:
-        for i in range(len(tvecs)):
-            imaxis = aruco.drawAxis(imaxis, mtx, dist, rvecs[i], tvecs[i], length_of_axis)
-            x = (corners[0][0][0][0] + corners[0][0][2][0])/2
-            y = (corners[0][0][0][1] + corners[0][0][2][1])/2
-            square_side_dimension = math.sqrt(math.pow(corners[0][0][3][1] - corners[0][0][0][1], 2) +
-                                        math.pow(corners[0][0][3][0] - corners[0][0][0][0], 2))
+    if  (ids==53):
+        if tvecs is not None:
+            for i in range(len(tvecs)):
+                imaxis = aruco.drawAxis(imaxis, mtx, dist, rvecs[i], tvecs[i], length_of_axis)
+                x = (corners[0][0][0][0] + corners[0][0][2][0])/2
+                y = (corners[0][0][0][1] + corners[0][0][2][1])/2
+                square_side_dimension = math.sqrt(math.pow(corners[0][0][3][1] - corners[0][0][0][1], 2) +
+                                            math.pow(corners[0][0][3][0] - corners[0][0][0][0], 2))
 
-            cv2.circle(imaxis, (int(corners[0][0][0][0]), int(corners[0][0][0][1])), 12, (255, 255, 0), 1)
-            cv2.circle(imaxis, (int(corners[0][0][3][0]), int(corners[0][0][3][1])), 12, (0, 0, 255), 1)
-            cv2.circle(imaxis, (int(x), int(y)), 12, (0, 255, 255), 2)
-
-
-    try:
-        
-
-        distance_cm_pc = 3317 * math.pow(square_side_dimension, -0.7468) + (-45.95)
-        distance_cm_drone = 1.129e+04 * math.pow(square_side_dimension, -0.9631) + (-11.26)
-
-        distance_cm = distance_cm_drone
-        
-        imaxis = cv2.putText(imaxis, str(distance_cm), (100, 200), 5, 5, (50, 255, 100))
-        print("square side in pixels:", square_side_dimension)
-        print("calculated distance in cm:", distance_cm)
-        print("  Detected ID: %s" % ids) 
-
-    except:
-        print("non vedo")
-
-   
+                cv2.circle(imaxis, (int(corners[0][0][0][0]), int(corners[0][0][0][1])), 12, (255, 255, 0), 1)
+                cv2.circle(imaxis, (int(corners[0][0][3][0]), int(corners[0][0][3][1])), 12, (0, 0, 255), 1)
+                cv2.circle(imaxis, (int(x), int(y)), 12, (0, 255, 255), 2)
 
 
-    cv2.imshow('QueryImage', QueryImg)
+        try:
+            
 
-    # Exit at the end of the video on the 'q' keypress
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+            distance_cm_pc = 3317 * math.pow(square_side_dimension, -0.7468) + (-45.95)
+            distance_cm_drone = 1.129e+04 * math.pow(square_side_dimension, -0.9631) + (-11.26)
+
+            distance_cm = distance_cm_drone
+            
+            imaxis = cv2.putText(imaxis, str(distance_cm), (100, 200), 5, 5, (50, 255, 100))
+            print("square side in pixels:", square_side_dimension)
+            print("calculated distance in cm:", distance_cm)
+            print("  Detected ID: %s" % ids) 
+
+        except:
+            print("non vedo")
+
+    
+
+
+        cv2.imshow('QueryImage', QueryImg)
+
+        # Exit at the end of the video on the 'q' keypress
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
 cv2.destroyAllWindows()

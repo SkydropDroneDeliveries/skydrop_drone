@@ -42,6 +42,33 @@ def arm_and_takeoff(aTargetAltitude):
       break
     time.sleep(1)
 
+
+
+#-- Define the function for sending mavlink condition yaw command
+def condition_yaw(vehicle, heading, direction, relative=True):
+    if relative:
+        is_relative=1 #yaw relative to direction of travel
+    else:
+        is_relative=0 #yaw is an absolute angle
+    # create the CONDITION_YAW command using command_long_encode()
+    msg = vehicle.message_factory.command_long_encode(
+        0, 0,    # target system, target component
+        mavutil.mavlink.MAV_CMD_CONDITION_YAW, #command
+        0, #confirmation
+        heading,    # param 1, yaw in degrees
+        0,          # param 2, yaw speed deg/s
+        direction,          # param 3, direction -1 ccw, 1 cw
+        is_relative, # param 4, relative offset 1, absolute angle 0
+        0, 0, 0)    # param 5 ~ 7 not used
+    # send command to vehicle
+    vehicle.send_mavlink(msg)
+    vehicle.flush()
+    
+
+
+    
+        
+
 #Takeoff height in meters
 arm_and_takeoff(20)
 
@@ -56,25 +83,12 @@ point1 = LocationGlobalRelative(-35.3629289, 149.1647789, 20)
 vehicle.simple_goto(point1)
 
 # # sleep so we can see the change in map
-time.sleep(10)
+time.sleep(20)
 
 print("Going towards second point for 30 seconds ...")
-point2 = LocationGlobalRelative(-35.3629289, 149.1647789, 4.8)
+point2 = LocationGlobalRelative(-35.3629289, 149.1647789, 4.915)
 vehicle.simple_goto(point2)
 
 # # sleep so we can see the change in map
 time.sleep(10)
 
-print("Going towards third point for 30 seconds ...")
-point3 = LocationGlobalRelative(-35.3629289, 149.1647789, 20)
-vehicle.simple_goto(point3)
-
-print("Returning to Launch")
-vehicle.mode = VehicleMode("RTL")
-
-# print("Land")
-# vehicle.mode = VehicleMode("LAND")
-
-# Close vehicle object before exiting script
-print("Close vehicle object")
-vehicle.close()
