@@ -36,6 +36,7 @@ We are going to obtain the following quantities:
 
 """
 
+from pickle import TRUE
 import numpy as np
 import cv2
 import cv2.aruco as aruco
@@ -48,7 +49,7 @@ class ArucoSingleTracker():
                 camera_matrix,
                 camera_distortion,
                 camera_size=[640,480],
-                show_video=False
+                show_video=True
                 ):
         
         
@@ -136,6 +137,8 @@ class ArucoSingleTracker():
         marker_found = False
         x = y = z = 0
         
+        font = cv2.FONT_HERSHEY_PLAIN
+
         while not self._kill:
             
             #-- Read the camera frame
@@ -200,7 +203,7 @@ class ArucoSingleTracker():
                     cv2.putText(frame, str_position, (0, 200), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
                     #-- Get the attitude of the camera respect to the frame
-                    roll_camera, pitch_camera, yaw_camera = rotationMatrixToEulerAngles(R_flip*R_tc)
+                    roll_camera, pitch_camera, yaw_camera = self._rotationMatrixToEulerAngles(self._R_flip*R_tc)
                     str_attitude = "CAMERA Attitude r=%4.0f  p=%4.0f  y=%4.0f"%(math.degrees(roll_camera),math.degrees(pitch_camera),
                                         math.degrees(yaw_camera))
                     cv2.putText(frame, str_attitude, (0, 250), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
@@ -228,13 +231,13 @@ if __name__ == "__main__":
 
     #--- Define Tag
     id_to_find  = 53
-    marker_size  = 10 #- [cm]
+    marker_size  = 100 #- [cm]
 
     #--- Get the camera calibration path
     calib_path  = ""
     camera_matrix   = np.loadtxt(calib_path+'cameraMatrix_webcam.txt', delimiter=',')
     camera_distortion   = np.loadtxt(calib_path+'cameraDistortion_webcam.txt', delimiter=',')                                      
-    aruco_tracker = ArucoSingleTracker(id_to_find=72, marker_size=10, show_video=False, camera_matrix=camera_matrix, camera_distortion=camera_distortion)
+    aruco_tracker = ArucoSingleTracker(id_to_find=53, marker_size=10, show_video=True, camera_matrix=camera_matrix, camera_distortion=camera_distortion)
     
     aruco_tracker.track(verbose=True)
 
