@@ -1,0 +1,45 @@
+DELIVERY NUMBER: 38
+**************************************
+-Log entry Time: 1648663864.89
+-Apartemtn ID: 4 
+-Navigation Phase  True
+-Marker Identification 
+      -Marker identified/Alignment: False
+-Delivery time:0
+
+Delivery Success:  True
+
+=========================================
+
+
+
+DELIVERY NUMBER: 33
+**************************************
+-Log entry Time: 1648664552.24
+-Apartemtn ID: 4 
+-Navigation Phase  True
+-Marker Identification 
+      -Marker identified/Alignment: False
+-Delivery time:0
+
+Delivery Success:  True
+
+=========================================
+
+
+
+DELIVERY NUMBER: 78
+**************************************
+-Log entry Time: 1648665611.99
+-Apartemtn ID: 4 
+-Navigation Phase  True
+-Marker Identification 
+      -Marker identified/Alignment: False
+-Delivery time:0
+
+Delivery Success:  True
+
+=========================================
+
+
+
