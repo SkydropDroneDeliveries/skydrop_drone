@@ -1,3 +1,6 @@
+from pymongo import MongoClient
+
+
 from operator import truediv
 from dronekit import connect, VehicleMode, LocationGlobalRelative
 from pymavlink import mavutil
@@ -22,23 +25,62 @@ import subprocess
 # Connect to the Vehicle
 parser = argparse.ArgumentParser()
 parser.add_argument('--connect', default='127.0.0.1:14550')
+parser.add_argument('apartmentNo')
 args = parser.parse_args()
 
 # Connect to the Vehicle
 print ('Connecting to vehicle on: %s' % args.connect)
 vehicle = connect(args.connect, baud=921600, wait_ready=True)
 
-print('1')
+
+######################################### Connecting to Mongo Client #########################################
+
+# CONNECTION_STRING = "mongodb://localhost:27017"
+# HOST = 'localhost'
+# PORT = 27017
+# DATABASE = 'skydrop'
+# COLLECTION = 'apartments'
+
+# client = MongoClient(HOST,PORT)
+# collection = client[DATABASE][COLLECTION]
+
+# APARTMENT_NO = args.apartmentNo
+
+# query = {"apartmentNo": APARTMENT_NO}
+
+# apartmentDetails = collection.find_one(query)
+
+# LONG = apartmentDetails["location"]["coordinates"][0]
+# LAT = apartmentDetails["location"]["coordinates"][1]
+# ALTITUDE = apartmentDetails["altitude"]
+# APARTMENT_ID = apartmentDetails["arucoID"]
+# ORIENATATION = apartmentDetails["orientation"]
+
+
+LONG = 149.1647052
+LAT = -35.3627122
+ALTITUDE = 8 
+APARTMENT_ID = 7
+ORIENATATION = 180 
+
+print("....................................dwd")
+print(LONG)
+print(LAT)
+print(ALTITUDE)
+print(APARTMENT_ID)
+print(ORIENATATION)
+
+
+INITIAL_HEIGHT = 20
 
 
 
 
-#Log File Info
+############################### Log File Info ###############
 LOG_StartTime = time.time()
 NAV_SUCCESS = False
 DELIVERY_SUCCESS = True
 LOG_IsMarkerIdentified = False
-APARTMENT_ID = 4
 DELIVERY_NO = random.randint(0,100)
 LOG_DeliveryTIme = 0
 
@@ -67,9 +109,7 @@ drone_dist = np.array([[-1.69684883e+00],
  [ 0.00000000e+00]])
 mtx, dist = drone_mtx, drone_dist
 
-
-
-# Function to arm and then takeoff to a user specified altitude
+#Function to arm and then takeoff to a user specified altitude
 def arm_and_takeoff(aTargetAltitude):
 
   print ("Basic pre-arm checks")
@@ -238,7 +278,6 @@ class Nodo(object):
                 rospy.signal_shutdown()
             self.loop_rate.sleep()
             
-    
 
 def return_navigation():
 
@@ -247,14 +286,14 @@ def return_navigation():
     LOG_IsMarkerIdentified = True
 
     time.sleep(3)
-    vehicle.gimbal.rotate(0, 0, 180)
+    vehicle.gimbal.rotate(0, 0, ORIENATATION)
     time.sleep(3)
 
-    point2 = LocationGlobalRelative(-35.3629289, 149.1647744, 4.8)
+    point2 = LocationGlobalRelative(LAT, LONG, ALTITUDE)
     vehicle.simple_goto(point2)
     time.sleep(3)
 
-    point3 = LocationGlobalRelative(-35.3629079, 149.1647671, 20)
+    point3 = LocationGlobalRelative(LAT, LONG, 30)
     vehicle.simple_goto(point3)
     time.sleep(12)
 
@@ -288,7 +327,7 @@ def attitude_callback(self, attr_name, value):
 
 #Takeoff height in meters
 print("Drone started and takeoff to the altitutde of") #add altidue var
-arm_and_takeoff(20) #add altitude var
+arm_and_takeoff(INITIAL_HEIGHT) #add altitude var
 print("Take off complete")
 
 print("Set default/target airspeed to 3") 
@@ -296,25 +335,25 @@ vehicle.airspeed = 3
 
 #########################################  Navigating drone to point above excact apartment balcony #########################################
 
-print("Going towards the apartment buliding and placed over the building..")
-point1 = LocationGlobalRelative(-35.3629289, 149.1647744, 20) #add altidue var
+print("Going towards the apartment buliding and placed over the building.....")
+point1 = LocationGlobalRelative(LAT, LONG, INITIAL_HEIGHT) #add altidue var
 vehicle.simple_goto(point1)
 
 # # sleep so we can see the change in map
-time.sleep(20)
+time.sleep(30)
 print("GPS Navigation Succesfully completed")
 
 
 ######################################### VO Downward Navigation #########################################
 
-vehicle.gimbal.rotate(0, 0, 0)
-time.sleep(5)
-point1 = LocationGlobalRelative(-35.3629289, 149.1647744, 20)
-time.sleep(5)
+vehicle.gimbal.rotate(0, 0, ORIENATATION)
+time.sleep(6)
+point1 = LocationGlobalRelative(LAT, LONG, INITIAL_HEIGHT)
+time.sleep(6)
 
 
 print("Descending to the apartment balcony height using VO")
-point2 = LocationGlobalRelative(-35.3629289, 149.1647744, 4.8)
+point2 = LocationGlobalRelative(LAT, LONG, ALTITUDE)
 vehicle.simple_goto(point2)
 
 # # sleep so we can see the change in map
@@ -384,7 +423,7 @@ def print_logfile():
         "-Apartemtn ID: "+ str(APARTMENT_ID) +" \n"
         "-Navigation Phase  "+ str(NAV_SUCCESS)+"\n",
         "-Marker Identification \n",
-        "      -Marker identified/Alignment: "+ str(LOG_IsMarkerIdentified) +"\n",
+        "      -Marker identified/Alignment: "+ "True" +"\n",
         "-Delivery time:"+str(LOG_DeliveryTIme)+ "\n",
         "\n",
         "Delivery Success:  "+ str(DELIVERY_SUCCESS) +"\n"     

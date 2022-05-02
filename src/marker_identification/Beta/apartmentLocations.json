@@ -1,0 +1,19 @@
+{
+    "name":"apartment 1",
+    "apartmentDetails":[
+        {
+            "id":2,
+            "latitude":-35.3629289,
+            "longitude":149.1647744,
+            "altitude":4.8
+        },
+        {
+            "id":4,
+            "latitude":-35.3629289,
+            "longitude":149.1647744,
+            "altitude":4.8
+        }
+
+    ]
+}
+
