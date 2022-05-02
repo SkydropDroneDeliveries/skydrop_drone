@@ -15,7 +15,7 @@ print('Connecting...')
 vehicle = connect('udp:127.0.0.1:14550')
 
 #-- Setup the commanded flying speed
-gnd_speed = 1 # [m/s]
+gnd_speed = 0.1 # [m/s]
 #-- Setup the commanded rotation angle
 angle = 1 #[degrees]
 

@@ -80,6 +80,10 @@ while(cam.isOpened()):
             print("calculated distance in cm:", distance_cm)
             print("  Detected ID: %s" % ids) 
 
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            str_attitude = "MARKER distance r=%4.0f  CM "%distance_cm
+            cv2.putText(QueryImg, str_attitude, (0, 75), font, 1, (55, 0, 255), 2, cv2.LINE_AA)
+
         except:
             print("non vedo")
 

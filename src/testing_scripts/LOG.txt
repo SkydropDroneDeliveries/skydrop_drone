@@ -1,0 +1,120 @@
+DELIVERY NUMBER: 0
+**************************************
+-Log entry Time:9
+-Apartemtn ID 
+-Navigation Phase  
+      -GPS Phase:  
+      -VO Phase:  
+      
+-Marker Identification 
+      -Marker identified: 
+      -Alignment done:  
+      -Distance Maintained to marker:  
+-Delivery time:  
+
+Delivery Success:  
+
+=========================================
+
+
+
+DELIVERY NUMBER: 1
+**************************************
+-Log entry Time:9
+-Apartemtn ID 
+-Navigation Phase  
+      -GPS Phase:  
+      -VO Phase:  
+      
+-Marker Identification 
+      -Marker identified: 
+      -Alignment done:  
+      -Distance Maintained to marker:  
+-Delivery time:  
+
+Delivery Success:  
+
+=========================================
+
+
+
+DELIVERY NUMBER: 2
+**************************************
+-Log entry Time:9
+-Apartemtn ID 
+-Navigation Phase  
+      -GPS Phase:  
+      -VO Phase:  
+      
+-Marker Identification 
+      -Marker identified: 
+      -Alignment done:  
+      -Distance Maintained to marker:  
+-Delivery time:  
+
+Delivery Success:  
+
+=========================================
+
+
+
+DELIVERY NUMBER: 3
+**************************************
+-Log entry Time:9
+-Apartemtn ID 
+-Navigation Phase  
+      -GPS Phase:  
+      -VO Phase:  
+      
+-Marker Identification 
+      -Marker identified: 
+      -Alignment done:  
+      -Distance Maintained to marker:  
+-Delivery time:  
+
+Delivery Success:  
+
+=========================================
+
+
+
+DELIVERY NUMBER: 4
+**************************************
+-Log entry Time:9
+-Apartemtn ID 
+-Navigation Phase  
+      -GPS Phase:  
+      -VO Phase:  
+      
+-Marker Identification 
+      -Marker identified: 
+      -Alignment done:  
+      -Distance Maintained to marker:  
+-Delivery time:  
+
+Delivery Success:  
+
+=========================================
+
+
+
+DELIVERY NUMBER: 5
+**************************************
+-Log entry Time:9
+-Apartemtn ID 
+-Navigation Phase  
+      -GPS Phase:  
+      -VO Phase:  
+      
+-Marker Identification 
+      -Marker identified: 
+      -Alignment done:  
+      -Distance Maintained to marker:  
+-Delivery time:  
+
+Delivery Success:  
+
+=========================================
+
+
+
